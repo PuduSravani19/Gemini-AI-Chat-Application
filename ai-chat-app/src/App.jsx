@@ -1,18 +1,14 @@
 
 import React from 'react';
-import ChatInput from './Components/chatInput.jsx';
-import ChatMessage from './Components/chatMessages.jsx';
-
+import ChatInput from './Components/Chats/chatInput.jsx';
+import ChatMessage from './Components/Chats/chatMessages.jsx';
+import Sidebar from './Components/Sidebar/sidebar.jsx';
 import './App.css';
 
-
-
 function App() {
- 
-  
-
-  return (
+ return (
     <div className="app-layout">
+      <Sidebar />
       
      <div className="chat-area">
         <ChatInput />

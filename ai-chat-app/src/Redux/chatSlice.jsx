@@ -19,7 +19,7 @@ const ChatSlice =createSlice({
     initialState:{
     messages:[],
     loading:false,
-    error:null
+    error:null,
     },
     reducers:{
         addUserMessages:(state,action)=>{
@@ -28,7 +28,14 @@ const ChatSlice =createSlice({
                 text:action.payload
             });
            
-         },
+    },
+     startNewChat:(state)=>{
+                state.messages=[];
+                state.error=null;
+                state.loading=false;
+
+            }
+           
     },
     extraReducers: (builder)=>{
         builder.addCase(fetchGeminiReply.pending,(state)=>{
@@ -55,5 +62,5 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat,loadChat} =ChatSlice.actions;
+export const {addUserMessages,startNewChat} =ChatSlice.actions;
 export default ChatSlice.reducer;
