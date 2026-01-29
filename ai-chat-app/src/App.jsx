@@ -1,7 +1,7 @@
 
 import React from 'react';
-import ChatInput from './Components/Chats/chatInput.jsx';
 import ChatMessage from './Components/Chats/chatWindow.jsx';
+import ChatInput from './Components/Chats/chatInput.jsx';
 import Sidebar from './Components/Sidebar/sidebar.jsx';
 import './App.css';
 
@@ -11,8 +11,10 @@ function App() {
       <Sidebar />
       
      <div className="chat-area">
+       <ChatMessage />
         <ChatInput />
-        <ChatMessage />
+       
+       
       </div>
     
   </div>
