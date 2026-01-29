@@ -20,6 +20,7 @@ const ChatSlice =createSlice({
     messages:[],
     loading:false,
     error:null,
+    chats:[]
     },
     reducers:{
         addUserMessages:(state,action)=>{
@@ -34,7 +35,27 @@ const ChatSlice =createSlice({
                 state.error=null;
                 state.loading=false;
 
-            }
+    },
+    addChatHistory:(state)=>{
+       if(state.messages.length === 0) return;
+       const firstUserMessage =state.messages.find((msg)=>msg.role === 'user');
+       if(!firstUserMessage)return;
+       const title=firstUserMessage.text.length >30 ?firstUserMessage.text.slice(0,30)+'...':firstUserMessage.text;
+       state.chats.unshift({
+        id:Date.now(),
+        title:title,
+        messages:[...state.messages]
+       })
+        
+    },
+    loadChat:(state,action)=>{
+        const chat=state.chats.find((c)=>c.id === action.payload);
+        if(!chat) return;
+        state.messages=chat.messages;
+        state.error=null;
+        state.loading=false;
+    }
+
            
     },
     extraReducers: (builder)=>{
@@ -62,5 +83,5 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat} =ChatSlice.actions;
+export const {addUserMessages,startNewChat,addChatHistory,loadChat} =ChatSlice.actions;
 export default ChatSlice.reducer;

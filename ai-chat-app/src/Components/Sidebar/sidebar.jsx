@@ -1,19 +1,29 @@
 import React from 'react';
 import './sidebar.css';
-import {useDispatch} from 'react-redux';
-import {startNewChat}  from '../../Redux/chatSlice.jsx';
+import {useDispatch,useSelector} from 'react-redux';
+import {startNewChat,addChatHistory,loadChat}  from '../../Redux/chatSlice.jsx';
 
  const Sidebar=()=>{
     const dispatch=useDispatch();
+    const chats=useSelector((state)=>state.chat.chats);
+    const handleNewChat=()=>{
+        dispatch(addChatHistory());
+        dispatch(startNewChat());
+    }
+    
     return(
         <div className="sidebar">
-            <button className="new-chat-btn" onClick={()=>dispatch(startNewChat())}>+ New Chat</button>
+            <button className="new-chat-btn" onClick={handleNewChat}>+ New Chat</button>
             <div className="chat-history">
+              
+              
+                
                 <p className="history-title">Chat History</p>
                 <ul>
-                    <li className="chat-item">How to use gemini api</li>
-                    <li className="chat-item">what is redux concepts</li>
-                    <li className="chat-item">why used redux nowdays than class based components</li>
+                  {chats.map((chat)=>(
+                    <li key={chat.id} className="chat-item" onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</li>
+                  ))}
+                  
                 </ul>
             </div>
 
