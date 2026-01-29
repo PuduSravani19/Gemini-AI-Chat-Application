@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './sidebar.css';
 import {useDispatch,useSelector} from 'react-redux';
-import {startNewChat,addChatHistory,loadChat,deleteChat}  from '../../Redux/chatSlice.jsx';
+import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat}  from '../../Redux/chatSlice.jsx';
 
 
  const Sidebar=()=>{
@@ -9,6 +9,8 @@ import {startNewChat,addChatHistory,loadChat,deleteChat}  from '../../Redux/chat
     const chats=useSelector((state)=>state.chat.chats);
     const activeChatId=useSelector((state)=>state.chat.activeChatId);
     const [openMenuId, setOpenMenuId]=useState(null);
+    const [editingId,setEditingId]=useState(null);
+    const [tempTitle,setTempTitle]=useState('');
     const handleNewChat=()=>{
         dispatch(addChatHistory());
         dispatch(startNewChat());
@@ -24,10 +26,32 @@ import {startNewChat,addChatHistory,loadChat,deleteChat}  from '../../Redux/chat
                 <p className="history-title">Chat History</p>
                 <ul>
                   {chats.map((chat)=>(
-                    <li key={chat.id} className={`chat-item ${chat.id === activeChatId ?'active':''}`}><span onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</span>
+                    <li key={chat.id} className={`chat-item ${chat.id === activeChatId ?'active':''}`}>
+                       {editingId === chat.id ? (
+                        <input value={tempTitle} autoFocus onChange={(e)=>setTempTitle(e.target.value)} onBlur={()=>{
+                            dispatch(renameChat({id:chat.id,title:tempTitle}));
+                            setEditingId(null);
+                        }}
+                        onKeyDown={(e)=>{
+                            if(e.key === 'Enter'){dispatch(renameChat({id:chat.id,title:tempTitle}));
+                            setEditingId(null);
+                        }
+                        }}
+                        />):( <span onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</span>)}
+
+                        {/* ... MENU */}
+                        <button onClick={()=>setOpenMenuId(chat.id)}>...</button>
+                       
                     <button  className="deleteButton" onClick={()=>setOpenMenuId(openMenuId ===chat.id ? null : chat.id)}>⋯</button>
                     {openMenuId === chat.id && (
-              <div className="chat-menu">
+                  <div className="chat-menu">
+               
+               <button onClick={()=>{
+                setEditingId(chat.id);
+                setTempTitle(chat.title);
+                setOpenMenuId(null);
+               }}>Rename</button>
+               {/* ... Delete Option inside ... Menu */}
                 <button
                   onClick={() => {
                     dispatch(deleteChat(chat.id));

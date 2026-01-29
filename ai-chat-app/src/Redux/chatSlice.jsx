@@ -65,6 +65,13 @@ const ChatSlice =createSlice({
         const chatId=action.payload;
         state.chats=state.chats.filter((chat)=>chat.id !== chatId);
         state.messages=[];
+    },
+    renameChat:(state,action)=>{
+        const {id,title}=action.payload;
+        const chat =state.chats.find((c)=>c.id === id);
+        if(chat){
+            chat.title=title;
+        }
     }
 
            
@@ -94,5 +101,5 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat} =ChatSlice.actions;
+export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat} =ChatSlice.actions;
 export default ChatSlice.reducer;
