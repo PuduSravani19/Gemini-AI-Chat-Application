@@ -6,6 +6,7 @@ import {startNewChat,addChatHistory,loadChat}  from '../../Redux/chatSlice.jsx';
  const Sidebar=()=>{
     const dispatch=useDispatch();
     const chats=useSelector((state)=>state.chat.chats);
+    const activeChatId=useSelector((state)=>state.chat.activeChatId);
     const handleNewChat=()=>{
         dispatch(addChatHistory());
         dispatch(startNewChat());
@@ -21,7 +22,7 @@ import {startNewChat,addChatHistory,loadChat}  from '../../Redux/chatSlice.jsx';
                 <p className="history-title">Chat History</p>
                 <ul>
                   {chats.map((chat)=>(
-                    <li key={chat.id} className="chat-item" onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</li>
+                    <li key={chat.id} className={`chat-item ${chat.id === activeChatId ?'active':''}`} onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</li>
                   ))}
                   
                 </ul>

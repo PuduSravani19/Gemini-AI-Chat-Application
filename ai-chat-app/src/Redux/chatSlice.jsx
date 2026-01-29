@@ -21,7 +21,8 @@ const ChatSlice =createSlice({
     messages:[],
     loading:false,
     error:null,
-    chats:savedChats
+    chats:savedChats,
+    activeChatId:null
 
     },
     reducers:{
@@ -36,6 +37,7 @@ const ChatSlice =createSlice({
                 state.messages=[];
                 state.error=null;
                 state.loading=false;
+                state.activeChatId =null;
 
     },
     addChatHistory:(state)=>{
@@ -55,6 +57,7 @@ const ChatSlice =createSlice({
         const chat=state.chats.find((c)=>c.id === action.payload);
         if(!chat) return;
         state.messages=chat.messages;
+        state.activeChatId=chat.id;
         state.error=null;
         state.loading=false;
     }
