@@ -13,6 +13,7 @@ export const fetchGeminiReply =createAsyncThunk('chat/fetchGeminiReply',
     }
 
 )
+const savedChats= JSON.parse(localStorage.getItem('chats')) || [];
 
 const ChatSlice =createSlice({
     name:'chat',
@@ -20,7 +21,8 @@ const ChatSlice =createSlice({
     messages:[],
     loading:false,
     error:null,
-    chats:[]
+    chats:savedChats
+
     },
     reducers:{
         addUserMessages:(state,action)=>{
@@ -45,7 +47,8 @@ const ChatSlice =createSlice({
         id:Date.now(),
         title:title,
         messages:[...state.messages]
-       })
+       });
+       localStorage.setItem('chats',JSON.stringify(state.chats));
         
     },
     loadChat:(state,action)=>{
