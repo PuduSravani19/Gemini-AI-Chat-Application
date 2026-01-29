@@ -41,3 +41,14 @@
     font-weight:600;
     border-left:3px solid #4caf50;
 }
+.deleteButton{
+    
+    border:none;
+    outline:none;
+    background:transparent;
+    margin-left:40px;
+    cursor:pointer;
+    
+    
+    
+}

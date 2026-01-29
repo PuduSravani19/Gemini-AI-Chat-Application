@@ -23,7 +23,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat}  from '../../Redux/chat
                 <ul>
                   {chats.map((chat)=>(
                     <li key={chat.id} className={`chat-item ${chat.id === activeChatId ?'active':''}`}><span onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</span>
-                    <button onClick={()=>dispatch(deleteChat(chat.id))}>❌</button>
+                    <button  className="deleteButton" onClick={()=>dispatch(deleteChat(chat.id))}>❌</button>
                     </li>
                    
                     
