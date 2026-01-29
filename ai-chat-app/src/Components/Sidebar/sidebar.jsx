@@ -1,7 +1,7 @@
 import React from 'react';
 import './sidebar.css';
 import {useDispatch,useSelector} from 'react-redux';
-import {startNewChat,addChatHistory,loadChat}  from '../../Redux/chatSlice.jsx';
+import {startNewChat,addChatHistory}  from '../../Redux/chatSlice.jsx';
 
  const Sidebar=()=>{
     const dispatch=useDispatch();
@@ -21,7 +21,7 @@ import {startNewChat,addChatHistory,loadChat}  from '../../Redux/chatSlice.jsx';
                 <p className="history-title">Chat History</p>
                 <ul>
                   {chats.map((chat)=>(
-                    <li key={chat.id} className="chat-item" onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</li>
+                    <li key={chat.id} className="chat-item">{chat.title}</li>
                   ))}
                   
                 </ul>
