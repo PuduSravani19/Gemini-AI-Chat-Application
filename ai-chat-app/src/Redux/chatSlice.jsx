@@ -48,8 +48,13 @@ const ChatSlice =createSlice({
        })
         
     },
-   
-    
+    loadChat:(state,action)=>{
+        const chat=state.chats.find((c)=>c.id === action.payload);
+        if(!chat) return;
+        state.messages=chat.messages;
+        state.error=null;
+        state.loading=false;
+    }
 
            
     },
@@ -78,5 +83,5 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat,addChatHistory} =ChatSlice.actions;
+export const {addUserMessages,startNewChat,addChatHistory,loadChat} =ChatSlice.actions;
 export default ChatSlice.reducer;
