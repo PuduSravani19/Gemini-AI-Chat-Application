@@ -14,10 +14,16 @@ export const sendMessageToGemini= async(message)=>{
     ],
     }),
 
-   })
+   });
+   if(response.status === 429){
+    throw new Error ("Too many requests.please wait and try again.");
+}
+
    if(!response.ok){
     throw new Error ('Failed to fetch Gemini response')
-;   }
+;   } 
+
+
 const data=await response.json();
 const candidate =data.candidates?.[0];
 const text =candidate?.content?.parts?.[0]?.text;

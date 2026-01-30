@@ -7,7 +7,7 @@ const ChatInput =()=>{
     const dispatch=useDispatch();
     const {loading} =useSelector((state)=>state.chat);
     const handleSend=()=>{
-        if(!text.trim())return
+        if(!text.trim())return;
         dispatch(addUserMessages(text))
         dispatch(fetchGeminiReply(text));
       
