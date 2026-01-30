@@ -48,7 +48,8 @@ const ChatSlice =createSlice({
        state.chats.unshift({
         id:Date.now(),
         title:title,
-        messages:[...state.messages]
+        messages:[...state.messages],
+        pinned:false
        });
        localStorage.setItem('chats',JSON.stringify(state.chats));
         
@@ -72,7 +73,15 @@ const ChatSlice =createSlice({
         if(chat){
             chat.title=title;
         }
+    },
+    togglePinChat:(state,action)=>{
+        const chat=state.chats.find(c=>c.id === action.payload);
+        if(chat){
+            chat.pinned =!chat.pinned;
+        }
+        state.chats.sort((a,b)=>b.pinned -a.pinned);
     }
+
 
            
     },
@@ -101,5 +110,5 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat} =ChatSlice.actions;
+export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat} =ChatSlice.actions;
 export default ChatSlice.reducer;

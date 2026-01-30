@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './sidebar.css';
 import {useDispatch,useSelector} from 'react-redux';
-import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat}  from '../../Redux/chatSlice.jsx';
+import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat}  from '../../Redux/chatSlice.jsx';
 
 
  const Sidebar=()=>{
@@ -39,18 +39,21 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat}  from '../..
                         }}
                         />):( <span onClick={()=>dispatch(loadChat(chat.id))}>{chat.title}</span>)}
 
-                        {/* ... MENU */}
-                        <button onClick={()=>setOpenMenuId(chat.id)}>...</button>
+
                        
-                    <button  className="deleteButton" onClick={()=>setOpenMenuId(openMenuId ===chat.id ? null : chat.id)}>⋯</button>
+                    <button  className="MenuButton" onClick={()=>setOpenMenuId(openMenuId ===chat.id ? null : chat.id)}>⋯</button>
                     {openMenuId === chat.id && (
                   <div className="chat-menu">
                
-               <button onClick={()=>{
+                 <button onClick={()=>{
                 setEditingId(chat.id);
                 setTempTitle(chat.title);
                 setOpenMenuId(null);
-               }}>Rename</button>
+               }}>Rename</button> 
+               <hr />
+             
+            <button onClick={()=>dispatch(togglePinChat(chat.id))}>{chat.pinned ? 'Unpin':'Pin'}</button>
+
                {/* ... Delete Option inside ... Menu */}
                 <button
                   onClick={() => {
