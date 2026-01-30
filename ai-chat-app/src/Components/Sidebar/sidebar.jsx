@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './sidebar.css';
 import {useDispatch,useSelector} from 'react-redux';
-import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat}  from '../../Redux/chatSlice.jsx';
+import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat}  from '../../Redux/chatSlice.jsx';
 
 
  const Sidebar=()=>{
@@ -25,6 +25,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
         a.click();
         URL.revokeObjectURL(url);
     };
+    const visibleChats =chats.filter(chat => !chat.archived);
     
     return(
         <div className="sidebar">
@@ -35,7 +36,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
                 
                 <p className="history-title">Chat History</p>
                 <ul>
-                  {chats.map((chat)=>(
+                  {visibleChats.map((chat)=>(
                     <li key={chat.id} className={`chat-item ${chat.id === activeChatId ?'active':''}`}>
                        {editingId === chat.id ? (
                         <input value={tempTitle} autoFocus onChange={(e)=>setTempTitle(e.target.value)} onBlur={()=>{
@@ -64,6 +65,16 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
                <hr />
              
             <button onClick={()=>dispatch(togglePinChat(chat.id))}>{chat.pinned ? 'Unpin':'Pin'}</button> <br />
+            <button
+          onClick={() => {
+            dispatch(toggleArchiveChat(chat.id));
+            setOpenMenuId(null);
+          }}
+        >
+          Archive
+        </button>
+          <br />
+          
 
                {/* ... Delete Option inside ... Menu */}
                 <button

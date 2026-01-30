@@ -22,7 +22,8 @@ const ChatSlice =createSlice({
     loading:false,
     error:null,
     chats:savedChats,
-    activeChatId:null
+    activeChatId:null,
+    
 
     },
     reducers:{
@@ -49,7 +50,8 @@ const ChatSlice =createSlice({
         id:Date.now(),
         title:title,
         messages:[...state.messages],
-        pinned:false
+        pinned:false,
+        archived:false
        });
        localStorage.setItem('chats',JSON.stringify(state.chats));
         
@@ -80,6 +82,15 @@ const ChatSlice =createSlice({
             chat.pinned =!chat.pinned;
         }
         state.chats.sort((a,b)=>b.pinned -a.pinned);
+    },toggleArchiveChat:(state,action)=>{
+        const chat =state.chats.find(c=>c.id === action.payload);
+        if(chat){
+            chat.archived =!chat.archived;
+        }
+        // if archived chat is currently open,clear window.
+        if(chat?.archived){
+            state.messages =[];
+        }
     }
 
 
@@ -110,5 +121,5 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat} =ChatSlice.actions;
+export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat} =ChatSlice.actions;
 export default ChatSlice.reducer;
