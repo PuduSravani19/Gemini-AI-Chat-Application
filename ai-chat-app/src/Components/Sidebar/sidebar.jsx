@@ -15,6 +15,16 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
         dispatch(addChatHistory());
         dispatch(startNewChat());
     }
+    const exportChat = (chat)=>{
+        const content =chat.messages.map((m)=> `${m.role.toUpperCase()}:${m.text}`).join('\n\n');
+        const blob = new Blob ([content],{type: 'text/plain'});
+        const url =URL. createObjectURL(blob);
+        const a=document .createElement('a');
+        a.href =url;
+        a.download =`${chat.title}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
     
     return(
         <div className="sidebar">
@@ -49,10 +59,11 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
                 setEditingId(chat.id);
                 setTempTitle(chat.title);
                 setOpenMenuId(null);
-               }}>Rename</button> 
+               }}>Rename</button> <br />
+               <button onClick={()=> {exportChat(chat); setOpenMenuId(null);}}>Export</button>
                <hr />
              
-            <button onClick={()=>dispatch(togglePinChat(chat.id))}>{chat.pinned ? 'Unpin':'Pin'}</button>
+            <button onClick={()=>dispatch(togglePinChat(chat.id))}>{chat.pinned ? 'Unpin':'Pin'}</button> <br />
 
                {/* ... Delete Option inside ... Menu */}
                 <button
