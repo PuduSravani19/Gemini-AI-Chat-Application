@@ -27,6 +27,8 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
     };
     const visibleChats =chats.filter(chat => !chat.archived);
     
+    const archivedChats =chats.filter(chat =>chat.archived);
+    
     return(
         <div className="sidebar">
             <button className="new-chat-btn" onClick={handleNewChat}>+ New Chat</button>
@@ -71,7 +73,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
             setOpenMenuId(null);
           }}
         >
-          Archive
+          {chat.archivedChats ? 'unArchive' :'Archive'}
         </button>
           <br />
           
