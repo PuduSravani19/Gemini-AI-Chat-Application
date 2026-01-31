@@ -23,6 +23,7 @@ const ChatSlice =createSlice({
     error:null,
     chats:savedChats,
     activeChatId:null,
+    searchQuery:''
     
 
     },
@@ -91,6 +92,9 @@ const ChatSlice =createSlice({
         if(chat?.archived){
             state.messages =[];
         }
+    },
+    setSearchQuery :(state,action)=>{
+        state.searchQuery =action.payload;
     }
 
 
@@ -121,5 +125,5 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat} =ChatSlice.actions;
+export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat,setSearchQuery} =ChatSlice.actions;
 export default ChatSlice.reducer;

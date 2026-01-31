@@ -3,11 +3,14 @@ import React,{useEffect,useRef} from 'react';
 import './chatWindow.css';
 const ChatMessage =()=>{
     
-const messages=useSelector((state)=>state.chat.messages);
+    
+const {messages}=useSelector((state)=>state.chat);
 const bottomRef=useRef(null);
 useEffect(()=>{
     bottomRef.current?.scrollIntoView({behavior:'smooth'});
 },[messages]);
+
+
     return(
         <div  className="chat-window">
             {messages.length === 0 && (

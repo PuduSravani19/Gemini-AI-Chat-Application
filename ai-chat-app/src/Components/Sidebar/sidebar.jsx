@@ -1,16 +1,17 @@
 import React,{useState} from 'react';
 import './sidebar.css';
 import {useDispatch,useSelector} from 'react-redux';
-import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat}  from '../../Redux/chatSlice.jsx';
+import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat,setSearchQuery}  from '../../Redux/chatSlice.jsx';
 
 
  const Sidebar=()=>{
     const dispatch=useDispatch();
-    const chats=useSelector((state)=>state.chat.chats);
+    const {chats,searchQuery}=useSelector((state)=>state.chat);
     const activeChatId=useSelector((state)=>state.chat.activeChatId);
     const [openMenuId, setOpenMenuId]=useState(null);
     const [editingId,setEditingId]=useState(null);
     const [tempTitle,setTempTitle]=useState('');
+    const [isSearchOpen,setIsSearchOpen]=useState(false);
     const handleNewChat=()=>{
         dispatch(addChatHistory());
         dispatch(startNewChat());
@@ -25,18 +26,21 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
         a.click();
         URL.revokeObjectURL(url);
     };
-    const visibleChats =chats.filter(chat => !chat.archived);
-    
-    const archivedChats =chats.filter(chat =>chat.archived);
+    const visibleChats =chats.filter(chat => !chat.archived)
+    .filter((chat)=> !chat.archived)
+    .filter((chat)=> chat.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    .sort((a,b)=>b.pinned -a .pinned);
+    ;
     
     return(
         <div className="sidebar">
             <button className="new-chat-btn" onClick={handleNewChat}>+ New Chat</button>
+            <button className ="new-search-chat" onClick={()=>setIsSearchOpen(prev => !prev)}>Search Chats</button>
+            {isSearchOpen && (
+                <input type='text' placeholder="Search Chats" value={searchQuery} onChange={(e)=>dispatch(setSearchQuery(e.target.value))} autoFocus />
+            )}
             <div className="chat-history">
-              
-              
-                
-                <p className="history-title">Chat History</p>
+              <p className="history-title">Chat History</p>
                 <ul>
                   {visibleChats.map((chat)=>(
                     <li key={chat.id} className={`chat-item ${chat.id === activeChatId ?'active':''}`}>
@@ -73,7 +77,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
             setOpenMenuId(null);
           }}
         >
-          {chat.archivedChats ? 'unArchive' :'Archive'}
+          {chat.archived ? 'unArchive' :'Archive'}
         </button>
           <br />
           

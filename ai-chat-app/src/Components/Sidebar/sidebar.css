@@ -15,6 +15,16 @@
     color:white;
     border-radius:6px;
 }
+.new-search-chat{
+     cursor:pointer;
+    width:100%;
+    padding:10px;
+    margin-bottom:16px;
+    background-color:#343541;
+    border:none;
+    color:white;
+    border-radius:6px;
+}
 .chat-history{
     margin-top:20px;
 
@@ -48,7 +58,4 @@
     background:transparent;
     margin-left:40px;
     cursor:pointer;
-    
-    
-    
-}
+    }
