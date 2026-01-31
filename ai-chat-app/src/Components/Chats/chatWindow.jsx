@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { useSelector,useDispatch} from 'react-redux';
-import {searchChats} from "../Redux/chatSlice.jsx";
+import {searchChats} from "../../Redux/chatSlice.jsx";
 
 import './chatWindow.css';
 

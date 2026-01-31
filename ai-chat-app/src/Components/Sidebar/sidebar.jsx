@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './sidebar.css';
 import {useDispatch,useSelector} from 'react-redux';
-import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat,startSearch}  from '../Redux/chatSlice.jsx';
+import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat,startSearch}  from '../../Redux/chatSlice.jsx';
 
 
  const Sidebar=()=>{
