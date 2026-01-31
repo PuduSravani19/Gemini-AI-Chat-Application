@@ -23,7 +23,9 @@ const ChatSlice =createSlice({
     error:null,
     chats:savedChats,
     activeChatId:null,
-    searchQuery:''
+    searchQuery:'',
+    
+    
     
 
     },
@@ -95,11 +97,15 @@ const ChatSlice =createSlice({
     },
     setSearchQuery :(state,action)=>{
         state.searchQuery =action.payload;
-    }
 
-
-           
     },
+   
+    
+    
+
+},
+           
+    
     extraReducers: (builder)=>{
         builder.addCase(fetchGeminiReply.pending,(state)=>{
             state.loading =true;

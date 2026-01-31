@@ -6,7 +6,8 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
 
  const Sidebar=()=>{
     const dispatch=useDispatch();
-    const {chats,searchQuery}=useSelector((state)=>state.chat);
+    
+    const {chats,searchQuery} = useSelector((state) => state.chat);
     const activeChatId=useSelector((state)=>state.chat.activeChatId);
     const [openMenuId, setOpenMenuId]=useState(null);
     const [editingId,setEditingId]=useState(null);
@@ -15,6 +16,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
     const handleNewChat=()=>{
         dispatch(addChatHistory());
         dispatch(startNewChat());
+    
     }
     const exportChat = (chat)=>{
         const content =chat.messages.map((m)=> `${m.role.toUpperCase()}:${m.text}`).join('\n\n');
@@ -26,19 +28,24 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
         a.click();
         URL.revokeObjectURL(url);
     };
-    const visibleChats =chats.filter(chat => !chat.archived)
-    .filter((chat)=> !chat.archived)
-    .filter((chat)=> chat.title.toLowerCase().includes(searchQuery.toLowerCase()))
-    .sort((a,b)=>b.pinned -a .pinned);
-    ;
+    const visibleChats = chats
+  .filter(chat => !chat.archived)
+  .filter(chat =>
+    chat.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+    
+   
+  
     
     return(
         <div className="sidebar">
             <button className="new-chat-btn" onClick={handleNewChat}>+ New Chat</button>
-            <button className ="new-search-chat" onClick={()=>setIsSearchOpen(prev => !prev)}>Search Chats</button>
+            <button className ="new-search-chat" onClick={()=>{setIsSearchOpen((prev)=> !prev);setOpenMenuId(null);}}>Search Chats</button>
             {isSearchOpen && (
-                <input type='text' placeholder="Search Chats" value={searchQuery} onChange={(e)=>dispatch(setSearchQuery(e.target.value))} autoFocus />
+                <input type="text" placeholder="Search chats..." value={searchQuery} onChange={(e)=>dispatch(setSearchQuery(e.target.value))} autoFocus />
             )}
+
             <div className="chat-history">
               <p className="history-title">Chat History</p>
                 <ul>
