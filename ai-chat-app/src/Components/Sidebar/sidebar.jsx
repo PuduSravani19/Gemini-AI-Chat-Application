@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './sidebar.css';
 import {useDispatch,useSelector} from 'react-redux';
-import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat,setSearchQuery}  from '../../Redux/chatSlice.jsx';
+import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat,startSearch}  from '../Redux/chatSlice.jsx';
 
 
  const Sidebar=()=>{
@@ -12,7 +12,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
     const [openMenuId, setOpenMenuId]=useState(null);
     const [editingId,setEditingId]=useState(null);
     const [tempTitle,setTempTitle]=useState('');
-    const [isSearchOpen,setIsSearchOpen]=useState(false);
+    //const [isSearchOpen,setIsSearchOpen]=useState(false);
     const handleNewChat=()=>{
         dispatch(addChatHistory());
         dispatch(startNewChat());
@@ -41,10 +41,12 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
     return(
         <div className="sidebar">
             <button className="new-chat-btn" onClick={handleNewChat}>+ New Chat</button>
-            <button className ="new-search-chat" onClick={()=>{setIsSearchOpen((prev)=> !prev);setOpenMenuId(null);}}>Search Chats</button>
-            {isSearchOpen && (
-                <input type="text" placeholder="Search chats..." value={searchQuery} onChange={(e)=>dispatch(setSearchQuery(e.target.value))} autoFocus />
-            )}
+            <button className="new-search-chat" onClick={()=>dispatch(startSearch())}>Search chats</button>
+            {chats.map(chat =>(
+                <div key={chat.id} onClick={()=>dispatch(loadChat(chat.id))} className="chat-item">{chat.title}</div>
+            ))}
+           
+           
 
             <div className="chat-history">
               <p className="history-title">Chat History</p>

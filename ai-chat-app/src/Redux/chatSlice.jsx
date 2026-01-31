@@ -23,11 +23,12 @@ const ChatSlice =createSlice({
     error:null,
     chats:savedChats,
     activeChatId:null,
-    searchQuery:'',
-    
-    
-    
-
+   
+   
+    currentChatId:1,
+    isSearching:false,
+    searchQuery:'',   //this is search chat title state.
+    searchResults:[]
     },
     reducers:{
         addUserMessages:(state,action)=>{
@@ -66,6 +67,9 @@ const ChatSlice =createSlice({
         state.activeChatId=chat.id;
         state.error=null;
         state.loading=false;
+        //.................//
+        state.currentChatId =action.payload;
+        state.isSearching =false;
     },
     deleteChat:(state,action)=>{
         const chatId=action.payload;
@@ -99,6 +103,16 @@ const ChatSlice =createSlice({
         state.searchQuery =action.payload;
 
     },
+    //...............//
+    startSearch:(state)=>{
+        state.isSearching=true;
+        state.searchQuery="";
+        state.searchResults=[];
+    },
+    searchChats:(state,action)=>{
+        state.searchQuery =action.payload;
+        state.searchResults =state.chats.filter(chat => chat.messages.some(msg=>msg.text.toLowerCase().includes(action.payload.toLowerCase())));
+    }
    
     
     
@@ -131,5 +145,7 @@ const ChatSlice =createSlice({
         })
     }
 })
-export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat,toggleArchiveChat,setSearchQuery} =ChatSlice.actions;
+export const {addUserMessages,startNewChat,addChatHistory,loadChat,deleteChat,
+    renameChat,togglePinChat,toggleArchiveChat,
+    setSearchQuery,startSearch,searchChats} =ChatSlice.actions;
 export default ChatSlice.reducer;
