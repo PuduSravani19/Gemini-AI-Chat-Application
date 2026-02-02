@@ -1,23 +1,41 @@
+
+.empty-cart{
+    color:white;;
+    font-size:16px;
+}
+
+
 .right{
     text-align:right;
     color:white;
-    font-size:17px;
-    
 }
 .left{
     text-align:left;
     color:white;
-    margin-left:10px;
-   
-    
+}
+.chat-window {
+  flex: 1;                  /* 🔑 pushes input down */
+  overflow-y: auto;
+  padding: 16px;
+}
+.search-heading {
+  display: flex;
+  flex:1;
+  flex-direction: column;
+  gap: 10px;
+  margin-top:20px;
+  align-items:center;
+}
+.search-input{
+    width:400px;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    color:black;
+    font-size:15px;
+}
 
-}
-.chat-window{
-    height:100%;
-    overflow-y:auto;
-    padding:16px;
-    margin:0px 10px;
-    flex:1;
-}
+
 
 

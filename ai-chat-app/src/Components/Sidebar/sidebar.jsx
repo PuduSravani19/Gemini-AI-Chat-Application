@@ -42,9 +42,8 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
         <div className="sidebar">
             <button className="new-chat-btn" onClick={handleNewChat}>+ New Chat</button>
             <button className="new-search-chat" onClick={()=>dispatch(startSearch())}>Search chats</button>
-            {chats.map(chat =>(
-                <div key={chat.id} onClick={()=>dispatch(loadChat(chat.id))} className="chat-item">{chat.title}</div>
-            ))}
+        
+        
            
            
 
@@ -70,17 +69,18 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
                     <button  className="MenuButton" onClick={()=>setOpenMenuId(openMenuId ===chat.id ? null : chat.id)}>⋯</button>
                     {openMenuId === chat.id && (
                   <div className="chat-menu">
-               
-                 <button onClick={()=>{
+                  
+                  
+                          <button className="menu-item" onClick={()=>{
                 setEditingId(chat.id);
                 setTempTitle(chat.title);
                 setOpenMenuId(null);
                }}>Rename</button> <br />
-               <button onClick={()=> {exportChat(chat); setOpenMenuId(null);}}>Export</button>
+               <button  className="menu-item" onClick={()=> {exportChat(chat); setOpenMenuId(null);}}>Export</button>
                <hr />
              
-            <button onClick={()=>dispatch(togglePinChat(chat.id))}>{chat.pinned ? 'Unpin':'Pin'}</button> <br />
-            <button
+            <button className="menu-item" onClick={()=>dispatch(togglePinChat(chat.id))}>{chat.pinned ? 'Unpin':'Pin'}</button> <br />
+            <button className="menu-item"
           onClick={() => {
             dispatch(toggleArchiveChat(chat.id));
             setOpenMenuId(null);
@@ -92,7 +92,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
           
 
                {/* ... Delete Option inside ... Menu */}
-                <button
+                <button className="menu-item" id="delete-item"
                   onClick={() => {
                     dispatch(deleteChat(chat.id));
                     setOpenMenuId(null);
@@ -100,7 +100,13 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
                 >
                   Delete
                 </button>
-              </div>
+
+                    </div>
+               
+               
+               
+              
+               
             )}
             </li>
                    

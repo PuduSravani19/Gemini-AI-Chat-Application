@@ -14,7 +14,12 @@ function App() {
   },[chats]);
  return (
     <div className="app-layout">
-      <Sidebar />
+      <div className="sidebar-layout">
+         <Sidebar />
+
+      </div>
+     
+     
       
      <div className="chat-area">
        <ChatMessage />

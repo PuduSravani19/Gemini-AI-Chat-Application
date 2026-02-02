@@ -15,7 +15,7 @@ const ChatInput =()=>{
         setText('');
     }
     return(
-        <div className="chat-box">
+        <div className="chat-input">
         
             <input className="input" type="text" placeholder="Ask something" value={text} onChange={(e)=>setText(e.target.value)} style={{flex:1,padding:'8px'}} disabled={loading}/>
             <button  className="button" onClick ={handleSend} disabled={loading}>

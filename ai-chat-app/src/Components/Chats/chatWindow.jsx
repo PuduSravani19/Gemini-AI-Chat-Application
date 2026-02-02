@@ -20,8 +20,8 @@ const ChatMessage = () => {
   // search mode UI
   if(isSearching){
     return(
-        <div className="chat-window">
-            <input type='text' placeholder="searching" value={searchQuery} onChange={(e)=>dispatch(searchChats(e.target.value))}/>
+        <div className="search-heading">
+            <input type='text'className="search-input" placeholder="searching" value={searchQuery} onChange={(e)=>dispatch(searchChats(e.target.value))}/>
             {searchResults.length === 0 && searchQuery && ( <p>No matching chats</p>)}
             {searchResults.map(chat=>(
                 <div key={chat.id} className="search-result">

@@ -1,3 +1,4 @@
+
 .sidebar{
     width:250px;
     height:100vh;
@@ -41,6 +42,10 @@
     background-color:#2f303a;
     border-radius:6px;
     cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
 
 }
 .chat-item:hover{
@@ -58,4 +63,45 @@
     background:transparent;
     margin-left:40px;
     cursor:pointer;
-    }
+    color:white;
+}
+.chat-menu {
+  position: absolute;
+  top: 30px;        /* adjust as needed */
+  right: 10px;      /* keeps it inside sidebar */
+  background:gray;
+  border-radius: 6px;
+  padding: 10px;
+  z-index: 1000;
+  width: 120px; 
+      /* fixed width avoids layout jump */
+  text-align:center;
+  left:180px;
+  border:1px solid #fff;
+  
+  
+}
+.menu-item{
+    background:none;
+    border:none;
+    outline:none;
+    margin-bottom:5px;
+    font-size:14px;
+    
+}
+.menu-item:hover{
+    background:#fff;
+    width:100%;
+    padding:5px 10px;
+    border-radius:7px;
+}
+#delete-item{
+    color:rgb(243, 98, 98);
+
+}
+
+
+
+
+
+
