@@ -87,13 +87,18 @@
     outline:none;
     margin-bottom:5px;
     font-size:14px;
+    padding:5px 10px;
+    
     
 }
 .menu-item:hover{
     background:#fff;
     width:100%;
-    padding:5px 10px;
+   
+    
     border-radius:7px;
+   
+    
 }
 #delete-item{
     color:rgb(243, 98, 98);

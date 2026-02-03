@@ -102,12 +102,7 @@ import {startNewChat,addChatHistory,loadChat,deleteChat,renameChat,togglePinChat
                 </button>
 
                     </div>
-               
-               
-               
-              
-               
-            )}
+)}
             </li>
                    
                     

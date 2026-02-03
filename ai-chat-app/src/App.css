@@ -19,9 +19,10 @@ html,body{
   display: flex;
   flex-direction: column;   /* 🔑 CRITICAL */
   background: black;
-  
-  
+ 
 }
+
+
 .sidebar-layout{
   display:flex;
   flex-direction:column;

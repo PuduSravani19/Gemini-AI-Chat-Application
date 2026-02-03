@@ -1,16 +1,102 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🤖 AI Chat Application (Gemini API)
 
-Currently, two official plugins are available:
+## 📌 Overview
+An AI-powered chat application built as a Single Page Application (SPA) using React and Redux Toolkit, integrated with the Google Gemini API.  
+The application enables real-time AI conversations and efficient chat history management, similar to modern AI chat platforms.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project focuses on production-level frontend development, including state management, scalable architecture, and real-world UI features.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Key Features
+- Real-time AI chat using Google Gemini API
+- Create new chat sessions and continue existing conversations
+- Chat history management:
+  - Search existing chats
+  - Rename chat titles
+  - Delete chats
+  - Archive chats
+  - Export chat history
+- Sidebar-based chat navigation
+- Auto-scroll to latest messages
+- Error handling for API responses
+- Responsive and clean UI
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+- Frontend: React, JavaScript (ES6+)
+- State Management: Redux Toolkit
+- API Integration: Google Gemini API
+- Styling: CSS
+- Build Tool: Vite
+- Version Control: Git & GitHub
+
+---
+
+## 🧱 Architecture & Design
+- Component-based architecture using React
+- Centralized global state management with Redux slices
+- Reusable components for chat input, messages, and sidebar
+- Dedicated service layer for Gemini API communication
+- Modular and scalable folder structure
+
+---
+
+## 📂 Project Structure
+src/
+├── Components/
+│   ├── Chats/
+│   │   ├── chatInput.jsx
+│   │   └── chatMessages.jsx
+│   └── Sidebar/
+│       └── sidebar.jsx
+├── Redux/
+│   └── chatSlice.jsx
+├── Services/
+│   └── geminiApi.js
+├── App.jsx
+└── main.jsx
+
+---
+
+## ⚙️ Installation & Setup
+1. Clone the repository:
+   git clone https://github.com/your-username/ai-chat-app.git
+
+2. Navigate to the project directory:
+   cd ai-chat-app
+
+3. Install dependencies:
+   npm install
+
+4. Create a .env file in the root directory:
+   VITE_GEMINI_API_KEY=your_gemini_api_key
+
+5. Start the development server:
+   npm run dev
+
+---
+
+## 🎯 Learning Outcomes
+- Hands-on experience with Redux Toolkit for complex state management
+- Real-world integration of AI APIs
+- Improved understanding of scalable frontend architecture
+- Practical experience with debugging and error handling
+- Strengthened Git and GitHub workflow
+
+---
+
+## 🚀 Future Enhancements
+- User authentication and authorization
+- Cloud-based chat history storage
+- Streaming AI responses
+- Dark / Light theme support
+- Mobile-first UI improvements
+
+---
+
+## ⭐ Why This Project Matters
+This project demonstrates production-ready frontend skills, including React and Redux integration, API handling, UI state management, and scalable application design.  
+It is well-suited for Frontend Developer and React Developer roles.

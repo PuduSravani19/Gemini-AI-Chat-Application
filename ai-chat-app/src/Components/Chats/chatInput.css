@@ -4,5 +4,26 @@
   gap: 8px;
   padding: 12px;
   border-top: 1px solid #333;
-  background: #2b2d33;
+  background:white;
+  margin-bottom:10px;
+  border:none;
+  border-radius:10px;
+  
+
+ }
+.input{
+    border-radius:10px;
+    border:none;
+    outline:none;
+    background:transparent;
+    
 }
+.button{
+    border-radius:10px;
+    border:none;
+    width:70px;
+    background-color:gray;
+    
+}
+
+
