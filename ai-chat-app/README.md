@@ -63,7 +63,7 @@ src/
 
 ## ⚙️ Installation & Setup
 1. Clone the repository:
-   git clone https://github.com/your-username/ai-chat-app.git
+   git clone https://github.com/PuduSravani19/Gemini-AI-Chat-Application.git
 
 2. Navigate to the project directory:
    cd ai-chat-app
